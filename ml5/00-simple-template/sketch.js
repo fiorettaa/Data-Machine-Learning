@@ -1,9 +1,7 @@
 /*
-  Data and machine learning for artistic practice
-  Week 2
-  
-  Empty template,
-
+  Data and Machine Learning for Artistic Practice (DMLAP)
+  Spring Term 2024
+  Empty template
 */
 
 function preload() {
