@@ -1,14 +1,16 @@
 /*
-  Data and machine learning for artistic practice (DMLAP)
-  Regression example 2
+  Data and Machine Learning for Artistic Practice (DMLAP)
+  Spring Term 2024
+  Regression Example 02
 
-  In this code we create colour markers on the screen, each time saving their
-  coordinates and r,g,b values and providing them to our neural network.
+  In this code we create colour markers on the screen, each time saving their coordinates
+  and r,g,b values and providing them to our neural network.
   e.g. nnAddData(inputs, output); in mousePressed();
 
-  Once we have enough points we call nnTrain(); this trains the neural network
+  Once we have enough points we call nnTrain();
+  This trains the neural network.
 
-  The demo will show a grid with all the colors predicted at each position.
+  The demo will show a GRID with all the colours predicted at each position.
 
   Instructions:
   - Click to place a point,
@@ -17,38 +19,6 @@
 
   All information to customise your neural network and training can be found here:
   https://learn.ml5js.org/#/reference/neural-network
-
-  IDEA:
-  - Can you find patterns where the neural net fails to capture the data?
-  - Maybe you would like to develop this sketch to allow you to explore the different parameters
-    of your network and of training more easily? One way of doing that would be to work with a
-    GUI library like https://github.com/bitcraftlab/p5.gui
-  - In this vein, one could imagine implementing ways to:
-    - Show which class is currently selected (1, 2 or 3) somewhere on the canvas
-    - Reset the neural network when pressing a key
-    - Reset the datapoints when pressing another key
-    - Show the prediction for the pixel under the mouse (draw an ellipse with the predicted color?)
-    - If you wanted to save/load your data points, here's how to do it:
-
-      // This will actually download a file.
-      function saveData(path){
-        saveJSON(data_points, './data.json');
-      }
-
-      // Loading and saving
-      function loadData(path){
-        function loaded(json){
-          // Note: you might want to recreate your nn here (or not)
-          data_points = json;              // Load existing data if any
-          for (const data of data_points){ // if we have points add them
-            let inputs = [data.x, data.y];
-            let outputs = [data.r, data.g, data.b];
-            nn.addData(inputs, outputs); // this adds the data to the neural network
-          }
-        }
-        loadJSON(path, loaded);
-      }
-
 */
 
 let nn,
@@ -56,11 +26,8 @@ let nn,
 
 let data_points = [];
 
-let canvasW = 500,
-    canvasH = 500;
-
 function setup() {
-  createCanvas(canvasW, canvasH);
+  createCanvas(500, 500);
 
   // set our background once at the start
   background(255);
@@ -68,16 +35,18 @@ function setup() {
   ourColor = color(255,0,0);
 
   // Setup the neural network
-  // For each example, the network has two inputs [x, y] (the mouse position) and three outputs [r, g, b] (the corresponding color)
-  // (Here we use the default config. To add more, look here under 'regression': https://learn.ml5js.org/#/reference/neural-network?id=defining-custom-layers)
+  // For each example, the network has two inputs [x, y] (the mouse position)
+  // and three outputs [r, g, b] (the corresponding colour)
+  // (Here we use the default config. To add more, look here under 'regression':
+  // https://learn.ml5js.org/#/reference/neural-network?id=defining-custom-layers)
   nn = ml5.neuralNetwork({
     inputs: 2,          // two inputs: x and y
     outputs: 3,         // three outputs: r, g and b
     task: 'regression', // because we predict the three numbers directly (r/g/b values)
     debug: true         // this opens the training pane
   });
-}
 
+}
 
 function draw() {
   // Note in this demo we update the canvas every frame
@@ -105,16 +74,46 @@ function draw() {
 }
 
 function mousePressed() {
-  // IDEA: perhaps we want to modify the sketch so that it is possible to
-  // add more data after training, and train again?
   if (mode == "training") {
-    // Draw a circle at our mouse coordinates, set to the colour of our current color.
-    // let inputs = [mouseX/canvasW, mouseY/canvasH];
+    // Draw a circle at our mouse coordinates, set to the colour of our current colour.
     let inputs = [mouseX, mouseY];
-    let outputs = [red(ourColor), green(ourColor), blue(ourColor)];
-    data_points.push({x: mouseX, y: mouseY,
-                      r: red(ourColor), g: green(ourColor), b: blue(ourColor)});
+    let outputs = [red(ourColor), 
+                  green(ourColor), 
+                  blue(ourColor)];
+    data_points.push({x: mouseX, 
+                      y: mouseY,
+                      r: red(ourColor), 
+                      g: green(ourColor), 
+                      b: blue(ourColor)});
     nn.addData(inputs, outputs);
+  }
+}
+
+// Draw the grid
+function drawGrid() {
+  let step = 20; // The square size for the grid
+
+  // Collect center points of each cell and put the points in an array
+  // (the array will be ordered by rows of the grid)
+  let inputs = [];
+  for (let y = 0; y < width; y += step){
+    for (let x = 0; x < height; x += step){
+      inputs.push([(x + step/2), (y + step/2)]);
+    }
+  }
+
+  // Predict colors for ALL collected center points
+  let res = nnPredict(inputs);
+
+  // Now draw the grid with the predicted colors
+  let i = 0;
+  for (let y = 0; y < width; y += step){
+    for (let x = 0; x < height; x += step){
+      const clr = res[i];
+      fill(clr[0], clr[1], clr[2]);
+      rect(x, y, step, step);
+      i += 1; // Increment cell (recall these are ordered by row and the inner loop
+    }         // goes along a row)
   }
 }
 
@@ -144,38 +143,45 @@ function keyPressed() {
       }, finishedTraining);  // This is a callback: the function finishedTraining is called when the training is over
       mode = "demo";         // This signals that we want to see updates as we train (might slow down training)
       break;
+    case "s":
+      saveData("data.json");
+      break;
+  //   case "l":
+  //     loadData("data.json");
+  //     break;
   }
 }
 
-// Draw the grid
-function drawGrid() {
-  let step = 20; // The square size for the grid
-
-  // Collect center points of each cell and put the points in an array
-  // (the array will be ordered by rows of the grid)
-  let inputs = [];
-  for (let y = 0; y < canvasW; y += step){
-    for (let x = 0; x < canvasH; x += step){
-      inputs.push([(x + step/2), (y + step/2)]);
-    }
-  }
-
-  // Predict colors for ALL collected center points
-  let res = nnPredict(inputs);
-
-  // Now draw the grid with the predicted colors
-  let i = 0;
-  for (let y = 0; y < canvasW; y += step){
-    for (let x = 0; x < canvasH; x += step){
-      const clr = res[i];
-      fill(clr[0], clr[1], clr[2]);
-      rect(x, y, step, step);
-      i += 1; // Increment cell (recall these are ordered by row and the inner loop
-    }         // goes along a row)
-  }
+// This will actually download a file. 
+function saveData(path){
+  saveJSON(data_points, './data.json');
 }
 
-// NN things
+// If you want to load existing data:
+// Loading and saving
+// function loadData(path){
+//   function loaded(json){
+//     // Clear the neural network
+//     nn = ml5.neuralNetwork({
+//       inputs: 2,          // two inputs: x and y
+//       outputs: 3,         // three outputs: r, g and b
+//       task: 'regression', // because we predict the three numbers directly (r/g/b values)
+//       debug: true         // this opens the training pane
+//     });
+//     // Load existing data if any
+//     data_points = json;
+//     // if we have points add them
+//     for (const data of data_points){
+//       let input = [data.x, data.y];
+//       let output = [data.r, data.g, data.b];
+//       // this adds the data to the neural network
+//        nn.addData(input, output);
+//     }
+//   }
+//   loadJSON(path, loaded);
+// }
+
+// about the NN
 function finishedTraining(){
   console.log("We finished training!");
   console.log("Here's how one raw prediction looks like for one datapoint:");

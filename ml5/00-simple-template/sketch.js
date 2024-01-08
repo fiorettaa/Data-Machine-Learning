@@ -1,7 +1,7 @@
 /*
   Data and Machine Learning for Artistic Practice (DMLAP)
   Spring Term 2024
-  Empty template
+  Empty Template
 */
 
 function preload() {

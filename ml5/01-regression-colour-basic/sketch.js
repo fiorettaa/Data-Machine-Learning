@@ -1,34 +1,32 @@
 /*
-  Data and machine learning for artistic practice (DMLAP)
-  Regression example 1
+  Data and Machine Learning for Artistic Practice (DMLAP)
+  Spring Term 2024
+  Regression Example 01
 
-  In this code we create colour markers on the screen, each time saving their
-  coordinates and r,g,b values and providing them to our neural network.
-  e.g. nn.addData(inputs, output); in mousePressed();
+  In this code we create colour markers on the screen, each time saving their coordinates
+  and r,g,b values and providing them to our neural network.
+  e.g. nnAddData(inputs, output); in mousePressed();
 
-  Once we have enough points we call nn.train(); this trains the neural network
+  Once we have enough points we call nnTrain();
+  This trains the neural network.
 
-  After it has trained we ask the neural network to predict the colour for the
-  mouse coordinates (reflected in the square)
+  After it has trained, we ask the neural network to predict the colour for the mouse coordinates,
+  reflected in the square on the bottom left corner of the canvas.
 
   Instructions:
-  - Click to place a point,
+  - Click to place a point
   - Press 1 to 3 to change the colour of the points
   - Press 't' to train the model
 
-  IDEA: An experiment that could help you gain some practice with this NN system
-        could be to try and implement two variants of this sketch: one that takes
-        *one* input instead of two (for instance only the x or the y). You would
-        need to make changes when you define your network, and whenever an input
-        is fed into your nn. You could also try and imagine what system could take
-        *three* inputs instead of two?
-  IDEA: Similarly, nothing stops you from making the nn predict only one number,
-        instead of three. Instead of having three different colours as we have here,
-        you could define three different radius sizes for ellipses. You select which
-        one using the numbers as above, and when you click to create data, you create
-        an ellipse with that radius at that point. Then, you train your neural net to
-        predict just this number, the radius, and when the model is trained, you could
-        draw an ellipse with the predicted radius at that spot.
+  IDEAS for experimentations: Play with a different number of inputs and/or outputs,
+                              to understand how this NN system works. E.g., instead of taking
+                              x and y as inputs, try using just one of them or a completely different one. 
+                              For that, you would need to make the respective changes when you define your network
+                              and whenever an input is fed into your NN. Can you think of cases where your system 
+                              could take 1, 3 or more inputs, instead of the 2 of this example?
+                              Similarly, can you think of cases where the NN predicts less or more than the 3 numbers
+                              you currently get as output (r, g, b)? What if you affected only the red values of the
+                              background or the diameter of a circle or a sound frequency, e.t.c.?                       
 */
 
 let nn,
@@ -50,7 +48,7 @@ function setup() {
 
   // Setup the neural network
   // For each example, the network has two inputs [x, y] (the mouse position)
-  // and three outputs [r, g, b] (the corresponding color)
+  // and three outputs [r, g, b] (the corresponding colour)
   // (Here we use the default config. To add more, look here under 'regression':
   // https://learn.ml5js.org/#/reference/neural-network?id=defining-custom-layers)
   nn = ml5.neuralNetwork({
@@ -63,17 +61,14 @@ function setup() {
 }
 
 function draw() {
-  // if we have already trained we want to show the output as a square
-  // in the bottom right-hand side
+  // after we train the NN, we move into the 'demo' mode
+  // where we want to show the output as a square in the bottom left-hand side
    if (mode === "demo") {
      const mouseColor = nnPredict([mouseX, mouseY]);
 
-     // IDEA: why not use the colour for the background, or a frame around the canvas?
-     // IDEA: how about changing this piece of code so that an ellipse is
-     //       drawn where the mouse is, with the color displayed accordingly?
-     // IDEA: you could also imagine looking into coding a bouncing ball (or
-     //       several), and use the position to determine the colour...
-     //       (of course, in both these cases you might want to hide the data points)
+     // Here you can modify your code in order to create a different visualisation
+     // of your output. How could you use mouseColor alternatively? 
+
      // console.log('mouse color:', mouseColor);
      fill(mouseColor[0], mouseColor[1], mouseColor[2]);
      rect(0, height-50, 50, 50);
@@ -82,7 +77,7 @@ function draw() {
 
 function mousePressed() {
   if (mode == "training") {
-    // draw a circle at our mouse coordinates, set to the colour of our current color.
+    // draw a circle at your mouse coordinates, set to the colour of your current colour
     fill(ourColor);
     noStroke();
     ellipse(mouseX, mouseY, 10, 10);
@@ -100,7 +95,7 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  // IDEA: play with more colours?
+
   if (key == "1") {
     ourColor = color(255,0,0);
   } else if (key == "2") {
@@ -120,11 +115,12 @@ function keyPressed() {
   }
 }
 
+// about the NN
 function finishedTraining(){
   console.log("We finished training!");
   console.log("Here's how one raw prediction looks like for one datapoint:");
   console.log(nn.predictSync([width/2,height/2])); // prediction for the centre of the canvas
-  // Switch to the demo mode - this will tell our app that we can visualize the result
+  // Switch to the demo mode - this will tell our app that we can visualise the result
   mode = "demo";
 }
 
@@ -142,10 +138,11 @@ function nnPredict(input) {
   // meaning that with "straight" ML5js we will need to parse these values and put them into our preferred format
   // (which is likely the one we provided in the first place as training data).
   //
-  // If we provide an array of inputs (asking for multiple predictions), predictedSync will return an array of such objects, so here we handle the two cases
+  // If we provide an array of inputs (asking for multiple predictions), predictSync will return an array of such objects,
+  // so here we handle the two cases
 
   // making it consistent with the input format
-  if (Array.isArray(input[0])){
+  if (Array.isArray(input[0])){ // checking if the value we pass in is an array
     // multiple predictions
     return res.map(element => element.map(v => v.value));
   } else {
