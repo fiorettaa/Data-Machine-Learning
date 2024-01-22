@@ -39,18 +39,20 @@ function draw() {
   // draw webcam frame
   image(video, 0, 0);
 
-  // IDEA: instead of only using the model as intended (image detection), how about
-  //       using, say, only the labels, or only the bounding boxes, as material for
-  //       some generative art where we would not necessarily even see the video feed?
-  // IDEA: note that the labels could be used poetically: for instance, you could choose
-  //       a large text file (containing one or more novels, poetry, other kinds  of
-  //       text), load it in memory, and then *search* through it for a sentence con-
-  //       taining the label of the object being detected?
-  // IDEA: something that I've seen implemented somewhere, is the idea of using an ex-
-  //       ternal API (an image search engine) to look for images of what is being de-
-  //       tected (person, apple, etc.), pull that from the internet, and display the
-  //       random image on top of the video feed in the bounding box of the detected
-  //       object?
+  // Ideas to explore:
+
+  // Could you think of a way to show the user (without requiring them to look into the console) 
+  // that the model is currently processing the image? You could use the fact that `detections` is 
+  // empty, i.e. has a length of 0.
+
+  // What about shifting the things you visualise? Instead of showcasing the original image, 
+  // you could draw only the predicted labels, and/or only the bounding boxes, and use these as material for
+  // some generative art.
+
+  // Note that the labels could be used poetically: for instance, you could choose
+  // a large text file (containing one or more novels, poetry, other kinds  of
+  // text), load it in memory, and then *search* through it for a sentence containing 
+  // the label of the object being detected?
 
   // loop through all our detections
   for (let object of detections) {
