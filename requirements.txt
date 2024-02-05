@@ -1,0 +1,16 @@
+numpy
+matplotlib
+scikit-learn
+scikit-image
+torch
+torchvision
+torchaudio
+torchtext
+opencv-python
+datasets 
+jupyter
+pandas 
+Pillow
+gdown
+gallery-dl
+ultralytics
