@@ -12,7 +12,7 @@ def load_model(model_path):
     return torch.jit.load(os.path.expanduser(model_path), map_location=device)
 
 # Assume models are in parent directory
-model_path = '../models/edge2rembrandt_195_generator.pt'
+model_path = '../models/landmarks2rembrandt_195_generator.pt'
 
 generator = load_model(model_path)
 # Do not 'eval', which will usually "freeze" batch normalization and dropout layers  that would block meaning that we still use the dropout layers

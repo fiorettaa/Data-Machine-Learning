@@ -12,7 +12,9 @@ def load_model(model_path):
     return torch.jit.load(os.path.expanduser(model_path), map_location=device)
 
 # Assume models are in parent directory
-model_path = '../models/edge2rembrandt_195_generator.pt'
+#model_path = '../models/edges2rembrandt_150_generator.pt'
+model_path = '../models/landmarks2rembrandt_195_generator.pt'
+#model_path = '../models/facades_196_generator.pt'
 
 generator = load_model(model_path)
 # Do not 'eval', which will usually "freeze" batch normalization and dropout layers  that would block meaning that we still use the dropout layers
@@ -49,7 +51,19 @@ def draw():
     rotate(frame_count*0.1)    # and rotate continuosly
     # draw some random circles
     for i in range(10):
-        circle(np.random.uniform(-height/2, height/2, 2), np.random.uniform(15, 30))
+        # Crete some rotating shapes that are always aligned to axes
+        push()
+        translate(np.random.uniform(-height/2, height/2, 2))
+        
+        rotate(-frame_count*0.1)
+        polyline(np.random.uniform(-20, 20, (6, 2))) # A random polygon
+        # rectangle(0, 0, 
+        #           np.random.uniform(10, 30),
+        #           np.random.uniform(10, 40))
+        #circle([0,0], np.random.uniform(15, 30))
+        pop()
+        
+    
     pop()
 
     # Get half of canvas

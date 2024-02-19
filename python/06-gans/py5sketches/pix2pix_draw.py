@@ -6,13 +6,14 @@ from skimage import feature, io
 import os
 
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu' # Can try 'mps' if using mac
+device = 'cuda' if torch.cuda.is_available() else 'cpu' 
 
 def load_model(model_path):
     return torch.jit.load(os.path.expanduser(model_path), map_location=device)
 
 # Assume models are in parent directory
-model_path = '../models/edge2rembrandt_195_generator.pt'
+model_path = '../models/landmarks2rembrandt_195_generator.pt'
+#model_path = '../models/edge2comics_60_generator.pt'
 
 generator = load_model(model_path)
 # Do not 'eval', which will usually "freeze" batch normalization and dropout layers  that would block meaning that we still use the dropout layers
@@ -21,6 +22,9 @@ generator = load_model(model_path)
 
 # Empty result initially
 result = np.ones((256, 256, 3))
+
+# Setting this to True will draw in realtime but might be slooow
+realtime = False
 
 def generate_image(model, img):
     img = torch.tensor((img/255)*2.0 - 1.0, 

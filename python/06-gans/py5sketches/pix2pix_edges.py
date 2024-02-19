@@ -13,6 +13,7 @@ def load_model(model_path):
 
 # Assume models are in parent directory
 model_path = '../models/edge2comics_11_generator.pt'
+#model_path = '../models/edge2comics_60_generator.pt'
 
 generator = load_model(model_path)
 # Do not 'eval', which will usually "freeze" batch normalization and dropout layers  that would block meaning that we still use the dropout layers
