@@ -31,7 +31,7 @@ def generate_image(model, img):
     res = model(img)[0].permute(1, 2, 0)
     return (res*0.5 + 0.5).detach().cpu().numpy()
 
-def canny(img, sigma=1.5):
+def canny(img, sigma=1.0):
     grayimg = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     grayimg = cv2.resize(grayimg, (256, 256))/255
     edges = (feature.canny(grayimg, sigma=sigma)*255).astype(np.uint8)

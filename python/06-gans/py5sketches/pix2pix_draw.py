@@ -47,18 +47,25 @@ def draw():
     # Draw in the left side of the window 
     if sketch.mouse_pressed:
         line(sketch.mouse_pos - sketch.mouse_delta, sketch.mouse_pos)
+    if realtime:
+        global result # We are modifying the global result variable from here
+        img = get_image()[:,:width//2,:]  # Slice the left half of the image grabbed from the canvas
+        img = cv2.resize(img, (256, 256)) # Resize it 
+        result = generate_image(generator, img) # Generate result
+
     # Draw result on the right side
     image(result, [width/2, 0], [width/2, width/2])
 
 def key_pressed(k, modifier):
     print('key pressed')
-    global result # We are modifying the global result variable from here
+    
     c = chr(k) # Get key code pressed
     if c=='c': 
         # c Clears background
         background(0)
     if c==' ':
         # Space generates the image
+        global result # We are modifying the global result variable from here
         img = get_image()[:,:width//2,:]  # Slice the left half of the image grabbed from the canvas
         img = cv2.resize(img, (256, 256)) # Resize it 
         result = generate_image(generator, img) # Generate result
