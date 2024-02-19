@@ -71,3 +71,8 @@ def draw():
     # Generate and draw result
     result = generate_image(generator, img)
     image(result, [256,0], [256, 256])
+
+if __name__== '__main__':
+    # This gets automatically called when running with python rather than py5sketch
+    import py5canvas
+    py5canvas.run()

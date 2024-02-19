@@ -21,6 +21,7 @@ generator = load_model(model_path)
 #generator.eval()
 
 vin = canvas.VideoInput(size=(256, 256))
+img = io.imread('../images/spock.jpg')
 
 def generate_image(model, img):
     img = torch.tensor((img/255)*2.0 - 1.0, 
@@ -45,6 +46,7 @@ def draw():
     torch.manual_seed(223)
     np.random.seed(122)
     im =  vin.read()
+    
     # Make sure image is 8 bit RGB
     im = im.astype(np.uint8)
     # Globally apply scale to fit window
@@ -57,3 +59,7 @@ def draw():
     res = generate_image(generator, edges)
     c.image(res, 256, 0)
 
+if __name__== '__main__':
+    # This gets automatically called when running with python rather than py5sketch
+    import py5canvas
+    py5canvas.run()

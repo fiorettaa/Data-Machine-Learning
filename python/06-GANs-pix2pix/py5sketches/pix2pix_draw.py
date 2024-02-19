@@ -69,3 +69,8 @@ def key_pressed(k, modifier):
         img = get_image()[:,:width//2,:]  # Slice the left half of the image grabbed from the canvas
         img = cv2.resize(img, (256, 256)) # Resize it 
         result = generate_image(generator, img) # Generate result
+
+if __name__== '__main__':
+    # This gets automatically called when running with python rather than py5sketch
+    import py5canvas
+    py5canvas.run()

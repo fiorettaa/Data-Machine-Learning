@@ -71,3 +71,7 @@ def draw():
     res = generate_image(generator, edges)
     c.image(res, 256, 0)
 
+if __name__== '__main__':
+    # This gets automatically called when running with python rather than py5sketch
+    import py5canvas
+    py5canvas.run()
