@@ -1,6 +1,6 @@
 ## **Python Setup**
 
-When it comes to installing Python, there can be many ways of implementing that. The install instructions below, follow the paradigm of [PyFAD](https://github.com/colormotor/PyFAD/blob/main/docs/conda_installation.ipynb), so that students who attended that module, continue with the same setup. 
+When it comes to installing Python, there can be many ways of implementing that. The install instructions below, follow the paradigm of [PyFAD](https://github.com/colormotor/PyFAD/blob/main/docs/conda_installation.ipynb), so that students who attended that module, continue with the same setup.
 
 We will use Miniforge to install Python efficiently. 
 
@@ -14,9 +14,9 @@ If you already have Conda installed, you can ignore the rest of this setup.
 
 ### Wondering if you already have Conda installed?
 
-In a terminal, type `where/which conda`. Use `which` on Linux/macOS, `where` on Windows.
+Open the terminal/command line, type in `where/which conda` and press enter. Use `which` if you are working on Linux/macOS, `where` if you are working on Windows.
 
-If it says something to the effect of ``conda not found``, then you are good to continue with your installation.
+If it says something to the effect of ``conda not found``, then you are good to continue with your installation. Otherwise, you probably already have conda installed.
 
 ### **Installation Steps**
 
@@ -31,7 +31,7 @@ If it says something to the effect of ``conda not found``, then you are good to 
    ```
    Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Miniforge Github > Requirements and Installers](https://github.com/conda-forge/miniforge).
 
-3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt but you can also check with the method mentioned above.
+3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt. You can also check with the ``where/which conda`` method mentioned above.
 
 #### **Windows:**
 
