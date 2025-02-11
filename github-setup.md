@@ -6,7 +6,7 @@ Before you proceed further, you need to [follow these instructions](https://gith
 
 You will also need a github account. If you do not already have one, you need to set up an account by following [these instructions](https://docs.github.com/en/get-started/quickstart/creating-an-account-on-github).
 
-### Creating a Project Repo
+### Creating your own Repo
 
 If you wish to create your own Github repo:
 
@@ -24,7 +24,7 @@ If you wish to create your own Github repo:
 
 By the time you have created your repo, you can manage it by following either one of the following options.
 
-### Managing the Project Repo - Option #1: Github Desktop
+### Managing your Repo - Option #1: Github Desktop
 
 - Download Github Desktop from [here](https://desktop.github.com/).
 
@@ -36,7 +36,7 @@ By the time you have created your repo, you can manage it by following either on
 
 - Finally, you need to `push` the changes, so that the remote repository syncs up with the changes that you made locally. Voila!
 
-### Managing the Project Repo - Option #2: Command Line
+### Managing your Repo - Option #2: Command Line
 
 - Open the terminal/command line and move to the directory where you want to store your repo, by typing the command `cd` along with the path to the directory, e.g.: `cd documents/github`
 
@@ -62,6 +62,12 @@ By the time you have created your repo, you can manage it by following either on
 
 - There is an option #3 for managing the project repo, which involves setting up Git in VS Code. If you want to process with this option, feel free to follow through [these instructions](https://code.visualstudio.com/docs/sourcecontrol/intro-to-git).
 
-### Cloning a Repo from an external source
+### Cloning a Repo from an External Source
 
 To clone a repository from an external source, you need to follow the exact same steps as above, with whichever option of your choice (Github Desktop or terminal) until the step where you have downloaded the repo on your computer and stored it in a specific directory. By the time you have done that, you can access the files of the repo and modify them as you wish. Your changes will not affect the original repo. You cannot push changes into it since you are not the creator of that repo.
+
+### Extra Resources
+
+- Dan Shiffman's [Git & GitHub for Poets](https://www.youtube.com/watch?v=BCQHnlnPusY&list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV) and [Workflow](https://www.youtube.com/watch?v=gJa6wri8YNQ&list=PLRqwX-V7Uu6Zu_uqEA6NqhLzKLACwU74X) series
+- Chris Alexiuk's [git good](https://www.youtube.com/watch?v=L8uAV6oh3Rg&list=PLiI2-gm0pf8cvd2Ra9RH7FrvOcyz7s2de) series
+- NYU [Git tutorial](https://nyu-dataservices.gitlab.io/rdm-instruction/intro-to-git-and-github.html)
