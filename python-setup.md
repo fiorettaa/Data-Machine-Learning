@@ -8,7 +8,7 @@ Setting up a Python environment (think of it as an ecosystem of packages) can so
 
 ![a fun representation of the maze of setting up a virtual environment](https://imgs.xkcd.com/comics/python_environment.png)
 
-[Miniforge](https://github.com/conda-forge/miniforge) is a lightweight distribution of [Conda](https://docs.conda.io/projects/conda/en/latest/), designed to simplify package management and environment handling for Python users. Unlike the standard [Miniconda](ttps://docs.conda.io/en/latest/miniconda.html) and [Anaconda](https://www.anaconda.com/) distributions, Miniforge is built around the Conda-Forge community-maintained package repository, which provides up-to-date and optimised packages. It also includes [Mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html), a faster alternative to Conda for package installation.
+[Miniforge](https://github.com/conda-forge/miniforge) is a lightweight distribution of [Conda](https://docs.conda.io/projects/conda/en/latest/), designed to simplify package management and environment handling for Python users. Unlike the standard [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Anaconda](https://www.anaconda.com/) distributions, Miniforge is built around the Conda-Forge community-maintained package repository, which provides up-to-date and optimised packages. It also includes [Mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html), a faster alternative to Conda for package installation.
 
 If you already have Conda installed, you can ignore the rest of this setup.
 
@@ -29,13 +29,13 @@ If it says something to the effect of ``conda not found``, then you are good to 
    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
    bash Miniforge3-$(uname)-$(uname -m).sh
    ```
-   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Requirements and Installers](https://github.com/conda-forge/miniforge?tab=readme-ov-file#requirements-and-installers).
+   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Requirements and Installers](https://github.com/conda-forge/miniforge).
 
 3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt but you can also check with the method mentioned above.
 
 #### **Windows:**
 
-1. Download Miniforge from [GitHub](https://github.com/conda-forge/miniforge?tab=readme-ov-file#install) (Windows x86_64 version)
+1. Download Miniforge from [GitHub > Install > Windows ](https://github.com/conda-forge/miniforge) (Windows x86_64 version)
 
 2. Run the installer with default settings. Select "Just Me" when asked.
 
