@@ -1,116 +1,95 @@
-# IS71074C: Data and Machine Learning for Artistic Practice (2024-25)
+## **Python Setup**
 
-# 1. Python Setup
+When it comes to installing Python, there can be many ways of implementing that. The install instructions below, follow the paradigm of [PyFAD](https://github.com/colormotor/PyFAD/blob/main/docs/conda_installation.ipynb), so that students who attended that module, continue with the same setup. 
 
-You will be installing Python using a package called Miniconda.
+We will use Miniforge to install Python efficiently. 
 
-[Miniconda](https://docs.conda.io/en/latest/miniconda.html) is a small, bootstrap version of [Anaconda](https://docs.conda.io/projects/conda/en/latest/glossary.html#anaconda-glossary) that includes conda, Python, the packages they depend on, and a small number of other useful packages, including pip, zlib and a few others.
-This will give you Python, as well as some useful packages that you’ll need, as well as a way for you to manage and switch between different python environments (more on that later), and install new packages and libraries.
+Setting up a Python environment (think of it as an ecosystem of packages) can sometimes feel like navigating a maze, as illustrated in the comic below. To simplify this process, we use [Conda](https://docs.conda.io/projects/conda/en/latest/), an open-source package and environment manager that works across Windows, macOS, and Linux. Conda allows for easy installation, updating, and dependency management while enabling seamless switching between different Python environments on your local computer.
 
-[Conda](https://docs.conda.io/projects/conda/en/latest/) is an open-source package and environment management system that runs on Windows, macOS, and Linux. Conda quickly installs, runs, and updates packages and their dependencies. It also easily manages and switches between different (python) environments on your local computer (more on than later). 
+![a fun representation of the maze of setting up a virtual environment](https://imgs.xkcd.com/comics/python_environment.png)
 
-If you already have Anaconda or Miniconda installed, you can ignore the rest of this set up.
+[Miniforge](https://github.com/conda-forge/miniforge) is a lightweight distribution of [Conda](https://docs.conda.io/projects/conda/en/latest/), designed to simplify package management and environment handling for Python users. Unlike the standard [Miniconda](ttps://docs.conda.io/en/latest/miniconda.html) and [Anaconda](https://www.anaconda.com/) distributions, Miniforge is built around the Conda-Forge community-maintained package repository, which provides up-to-date and optimised packages. It also includes [Mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html), a faster alternative to Conda for package installation.
 
-## How to know if conda is already installed?
+If you already have Conda installed, you can ignore the rest of this setup.
 
-### Mac OSX
+### Wondering if you already have Conda installed?
 
-Open up a Terminal and type ``which conda``
-
-### Windows
-
-Open up a Terminal and type ``where conda``
+In a terminal, type `where/which conda`. Use `which` on Linux/macOS, `where` on Windows.
 
 If it says something to the effect of ``conda not found``, then you are good to continue with your installation.
 
-## Installing Miniconda 
+### **Installation Steps**
 
-Go to the [Downloads page](https://docs.conda.io/en/latest/miniconda.html) and get the installer for your machine.
+#### **macOS & Linux:**
 
-### Mac OSX
+1. Open Terminal
 
-Is your Mac an M1 or M2?
+2. Run:
+   ```bash
+   curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+   bash Miniforge3-$(uname)-$(uname -m).sh
+   ```
+   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Requirements and Installers](https://github.com/conda-forge/miniforge?tab=readme-ov-file#requirements-and-installers).
 
-If so, get the correct installer: Miniconda3 macOS Apple M1 64-bit pkg 
+3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt but you can also check with the method mentioned above.
 
-Older intel Macs should use: Miniconda3 macOS Intel x86 64-bit pkg
+#### **Windows:**
 
-### Windows
+1. Download Miniforge from [GitHub](https://github.com/conda-forge/miniforge?tab=readme-ov-file#install) (Windows x86_64 version)
 
-You probably have a 64 bit machine: Miniconda3 Windows 64-bit
+2. Run the installer with default settings. Select "Just Me" when asked.
 
-Follow the instructions on the installer that runs 
+3. Open **Miniforge Prompt** for command-line operations. This is the terminal you should use -instead of the official Windows terminal- whenever you want to install dependencies.
 
-## Checking Installation 
+### **Creating Environments**
 
-Close any open Terminals or Command Prompts, then reopen a new one 
+By the time you have ``conda`` installed, you can create an environment specifically for our module where you will be installing all necessary packages from now on.
 
-### Mac OSX
+1. Open Terminal or Miniforge Prompt
 
-* ``which conda`` should return a message 
-* ``which python`` should return a file path to a miniconda installation 
+2. Create a Python environment, named ``dmlap`` for our module:
+   ```bash
+   conda create -n dmlap python=3.10
+   ```
+3. Activate the environment:
+   ```bash
+   conda activate dmlap
+   ```
+4. To deactivate:
+   ```bash
+   conda deactivate
+   ```
+Where ``conda``, you could also use ``mamba`` for faster execution. ``conda`` and ``mamba`` can be used interchangeably.
 
-### Windows
+### **Managing Environments**
 
-* ``where conda`` should return a message 
-* ``where python`` should return a file path to a miniconda installation
+When you have an environment activated (step 3), you can:
 
-# 2. Setting up a Conda Environment 
+- Check what packages are installed in your environment: ```conda list```
+- Install a new package, e.g. 'jupyter': ```conda install -c conda-forge jupyter```
+- Remove a package (e.g. 'jupyter' if already installed) from your currently active environment: ```conda remove jupyter```
+- Remove a list of packages from an environemnt called 'myenv': ```conda remove -n myenv scipy curl wheel```
 
-A [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html) is a directory that contains a specific collection of conda packages that you have installed. For example, you may have one environment with NumPy 1.7 and its dependencies, and another environment with NumPy 1.6 for legacy testing. If you change one environment, your other environments are not affected. This allows you to work cleanly on your different projects that may require different versions of libraries or Python itself. You can easily activate or deactivate environments, which is how you switch between them. 
+While you are on your base environment, you can also: 
+- List all your conda environments: ```conda env list```
+- Remove an existing environment that you no longer want: ```conda env remove --name myenv```
 
-## Creating the environment
+This is just a selection of ``conda`` commands that can be handy to use. Look into the [reference page](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html) and the [cheatsheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html) for more.
 
-We are going to create a new conda environment (a specific collection of packages) for this unit, which is a good practice, especially if you are doing other Python/ML work on the same machine, or if you're on a shared machine.
+### **Using Python in VSCode**
 
-You can use the terminal/console and type: 
+1. Install VSCode and extensions: **Python** and **Jupyter**
 
-``conda create --name dmlap python=3.9`` 
+2. Open a Jupyter Notebook (`.ipynb`)
 
-This will create a Python 3.9 environment named 'dmlap', standing for 'Data and Machine Learning for Artistic Practice'. Feel free to choose some other name if you prefer. (Notice that we are selecting a specific version of Python. In some projects, there might be incompatibility between a Python version and another dependency. In that case, you will need to create a new conda environment with different configurations.)
+3. On the top right corner of your window, click **Select Kernel** > **Select Environment** and choose your Miniforge environment
 
-You then need to activate this environment by typing:
+4. Open a code cell and run:
+   ```python
+   print("Hello world")
+   ```
 
-``conda activate dmlap``
+### **Troubleshooting**
 
-And you can always deactivate it by typing:
+If something goes wrong, delete the Miniforge directory (a local folder for your current user) and reinstall.
 
-``conda deactivate``
-
-Once you've created and activated the environment, install jupyter (for using Jupyter Notebook, a web-based interactive computational environment for creating notebook documents) and pandas (a data analysis tool) using the terminal/console:
-
-``conda install -c conda-forge -y pandas jupyter``
-
-The two packages are now installed **only** in your environment dmlap. From now on, make sure you always activate this environment when working on the lab/project activities of this module!
-
-## Checking what packages are installed in your environment
-
-```conda list```
-
-## Removing a package from your environment
-
-Remove the package 'scipy' from the currently-active environment:
-
-```conda remove scipy```
-
-Remove a list of packages from an environemnt 'myenv':
-
-```conda remove -n myenv scipy curl wheel```
-
-## Listing all your conda environments
-
-```conda env list```
-
-## Removing an existing conda environment
-
-Removing an environment 'myenv': 
-
-```conda env remove --name myenv```
-
-## More info can be found here:
-
-[Getting Started with Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
-
-[Conda Cheatsheet](https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html)
-
-![a fun representation of the maze of setting up a virtual environment](https://imgs.xkcd.com/comics/python_environment.png)
