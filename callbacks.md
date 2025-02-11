@@ -1,4 +1,4 @@
-# IS71074B/A: DMLAP - Callbacks and Asynchronous Programming in JavaScript
+# IS71074C: Data and Machine Learning for Artistic Practice (2024-25) - Callbacks and Asynchronous Programming in JavaScript
 
 In the ML5js examples we will see, you will encounter Javascript (JS) functions that are are &ldquo;automatically&rdquo; called when some process (such as training) is finished. This is very common in scripting languages and we might encounter it later as well, when we will look into Python.
 

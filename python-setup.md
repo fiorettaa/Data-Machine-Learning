@@ -1,4 +1,4 @@
-# IS71074B/A: DMLAP - Python Setup and Conda Environments
+# IS71074C: Data and Machine Learning for Artistic Practice (2024-25)
 
 # 1. Python Setup
 

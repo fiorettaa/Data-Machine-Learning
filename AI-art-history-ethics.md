@@ -1,4 +1,4 @@
-# IS71074B/A: DMLAP - AI, Art, History and Ethics
+# IS71074C: Data and Machine Learning for Artistic Practice (2024-25) - AI, Art, History and Ethics
 
 <!---
 Convert this to HTML with https://markdowntohtml.com
