@@ -29,7 +29,7 @@ If it says something to the effect of ``conda not found``, then you are good to 
    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
    bash Miniforge3-$(uname)-$(uname -m).sh
    ```
-   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Requirements and Installers](https://github.com/conda-forge/miniforge).
+   Where ``(uname)-$(uname -m)`` replace with the specific name of your operation system. See [Miniforge Github > Requirements and Installers](https://github.com/conda-forge/miniforge).
 
 3. Close and reopen Terminal. If successful, you’ll see **(base)** in the prompt but you can also check with the method mentioned above.
 
