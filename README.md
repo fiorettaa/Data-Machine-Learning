@@ -1,6 +1,6 @@
-# IS71074C: Data and Machine Learning for Artistic Practice
+# IS71074C: Data and Machine Learning for Artistic Practice (2024-25)
 
-This repo hosts teaching materials for the module Data and Machine Learning for Artistic Practice (DMLAP) for the academic year 2024-25, and is addressed to students of the MA/MFA Computational Arts department of Goldsmiths, University of London.
+This repo hosts teaching materials for the module Data and Machine Learning for Artistic Practice (DMLAP), and it is addressed to students of the MA/MFA Computational Arts department of Goldsmiths, University of London.
 
 In this repo you will find code examples in p5/ml5.js and in python. In order to run the python code examples, you will need to:
 
